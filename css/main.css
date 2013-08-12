@@ -1,35 +1,3 @@
-html, body {
-    height: 100%;
-}
-
-body {
-    font-family: 'Source Sans Pro', Helvetica Neue, Segoe UI, trebuchet MS, Arial, sans-serif;
-}
-
-html {
-    font-size: 15px;
-}
-
-.font-small {
-    font-size: 13px;
-}
-
-.font-normal {
-
-}
-
-.font-large {
-    font-size: 18px;
-}
-
-.float-left {
-    float: left;
-}
-
-.float-right {
-    float: right;
-}
-
 .pages-container {
     position: absolute;
     top: 0;

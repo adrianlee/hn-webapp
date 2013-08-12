@@ -7,7 +7,7 @@
       <title>My Beautiful Web App</title>
       <meta name="description" content="">
       <meta name="HandheldFriendly" content="True">
-      <meta name="MobileOptimized" content="320">
+      <meta name="MobileOptimized" content="360">
       <meta http-equiv="cleartype" content="on">
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 
@@ -23,8 +23,11 @@
 
       <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600"/>
       <link rel="stylesheet" href="css/normalize.css">
+      <link rel="stylesheet" href="css/common.css">
       <link rel="stylesheet" href="css/main.css">
       <!-- // <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
+
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
   </head>
   <body>
     <div class="pages-container">
@@ -40,9 +43,9 @@
 
       <div class="page page-article-content">
         <div class="header-container">
-          <button class="float-left" onclick="$('.page-home').toggleClass('show-page'); $('.page-article-content').toggleClass('show-page');">back</button>
+          <a class="button float-left" onclick="$('.page-home').toggleClass('show-page'); $('.page-article-content').toggleClass('show-page');">back</a>
+          <a class="button float-right" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');">comments</a>
           <header class="header">
-          <button class="float-right" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');">comments</button>
             Content
           </header>
         </div>
@@ -50,7 +53,7 @@
 
       <div class="page page-article-comments">
         <div class="header-container">
-          <button class="float-left" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');">back</button>
+          <a class="float-left" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');">back</a>
           <header class="header">
             Comments
           </header>
@@ -66,3 +69,4 @@
     <script src="js/main.js"></script>
   </body>
 </html>
+  
