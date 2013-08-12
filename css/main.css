@@ -1,27 +1,33 @@
-#main {
-    height: 100px;
-    width: 100%;
-    background-color: #333;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+html, body {
+    height: 100%;
 }
 
-#content {
-    height: 100px;
-    width: 100%;
-    background-color: #777;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    -webkit-transition: all .2s linear;
-    -webkit-transform: translate3d(100%, 0, 0);   
+body {
+    font-family: 'Source Sans Pro', Helvetica Neue, Segoe UI, trebuchet MS, Arial, sans-serif;
 }
 
-.show {
-    background-color: #eee;
-    color: #ff0000;
-    -webkit-transform: translate3d(50%, 50px, 0);
+html {
+    font-size: 15px;
+}
+
+.font-small {
+    font-size: 13px;
+}
+
+.font-normal {
+
+}
+
+.font-large {
+    font-size: 18px;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
 }
 
 .pages-container {
@@ -30,7 +36,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    overflow: hidden;
 }
 
 .pages-container .page {
@@ -39,7 +44,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #f60;
+    background: #FCFBE3;
     opacity: 1;
     z-index: 1;
     -webkit-transform: translate3d(100%, 0, 0);
@@ -54,6 +59,7 @@
 
 .pages-container .page-home {
     display: block;
+    width: 100%;
     -webkit-transform: translate3d(-100%, 0, 0);
     -moz-transform: translate3d(-100%, 0, 0);
     -ms-transform: translate3d(-100%, 0, 0);
@@ -69,10 +75,17 @@
     transform: translate3d(0, 0, 0);
 }
 
+.pages-container .header-container {
+    height: 50px;
+    background-color: #C3FF68;
+}
+
+.header {
+    text-align: center;
+    line-height: 50px;
+}
+
 @media only screen and (min-width : 768px) {
-    .mobile {
-        height: 1px;
-    }
     .pages-container .page {
         -webkit-transform: translate(0, 0);
         -moz-transform: translate(0, 0);
