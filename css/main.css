@@ -1,0 +1,99 @@
+#main {
+    height: 100px;
+    width: 100%;
+    background-color: #333;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#content {
+    height: 100px;
+    width: 100%;
+    background-color: #777;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    -webkit-transition: all .2s linear;
+    -webkit-transform: translate3d(100%, 0, 0);   
+}
+
+.show {
+    background-color: #eee;
+    color: #ff0000;
+    -webkit-transform: translate3d(50%, 50px, 0);
+}
+
+.pages-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.pages-container .page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f60;
+    opacity: 1;
+    z-index: 1;
+    -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    -webkit-transition: -webkit-transform 400ms ease, opacity 400ms ease;
+    -moz-transition: all 400ms ease;
+    -ms-transition: all 400ms ease;
+    transition: all 400ms ease;
+}
+
+.pages-container .page-home {
+    display: block;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    -moz-transform: translate3d(-100%, 0, 0);
+    -ms-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.pages-container .show-page {
+    z-index: 5;
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+@media only screen and (min-width : 768px) {
+    .mobile {
+        height: 1px;
+    }
+    .pages-container .page {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+    .pages-container .page-home {
+        width: 360px;
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+    .android-chrome .pages-container .page-home {
+        display: block;
+    }
+    .pages-container .page-about,
+    .pages-container .page-settings,
+    .pages-container .page-performance,
+    .pages-container .page-article-comments,
+    .pages-container .page-article-content {
+        left: 360px;
+    }
+}
