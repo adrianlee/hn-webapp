@@ -1,0 +1,47 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Source Sans Pro', Helvetica Neue, Segoe UI, trebuchet MS, Arial, sans-serif;
+}
+
+html {
+    font-size: 15px;
+}
+
+a {
+	cursor: pointer;
+}
+
+.font-small {
+    font-size: 13px;
+}
+
+.font-normal {
+
+}
+
+.font-large {
+    font-size: 18px;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.header-container .header {
+	font-weight: 400;
+	font-size: 22px;
+}
+
+.header-container .button {
+	background-color: rgba(255, 255, 255, 0.6);
+	margin: 8px;
+	padding: 10px;
+	line-height: 15px;
+}
