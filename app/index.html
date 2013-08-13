@@ -43,16 +43,23 @@
 
         <!-- Content -->
         <div class="content-container">
-          <ul>
-            <li data-ng-repeat="item in items">
-              <span onclick="$('.page-home').toggleClass('show-page'); $('.page-article-content').toggleClass('show-page');" item="item">{{item.title}}</span>
-            </li>
+          <ul class="content-items">
+            <li data-ng-repeat="item in items" item="item"></li>
           </ul>
         </div>
       </div>
 
       <!-- Right -->
       <div class="page page-article-content">
+        <!-- Header -->
+        <div class="header-container">
+          <a class="button float-left" href='/'>back</a>
+          <a class="button float-right" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');">comments</a>
+          <header class="header">
+            <span>Content</span>
+          </header>
+        </div>
+
         <div ng-view></div>
       </div>
 
@@ -63,8 +70,27 @@
       </div>
     </divv>
 
-    <script type="text/x-hn-webapp" class="template-article-list">
-      
+    <script type="text/ng-template" id="item.html">
+      <div class="content-container">
+        <h3 data-ng-bind="item.title"></h3>
+        <a data-ng-href="{{item.url}}" data-ng-bind="item.url"></a>
+        <hr>
+        <span data-ng-repeat="comment in item.comments"><span ng-bind-html-unsafe="comment.content"></span></span>
+        <hr>
+        <span data-ng-bind="item | json"></span>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="settings.html">
+      <div class="content-container">
+        <3
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="404.html">
+      <div class="content-container">
+        404 Something went wrong!
+      </div>
     </script>
 
     <script type="text/x-hn-webapp" class="template-page-article-content">
