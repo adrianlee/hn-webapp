@@ -88,7 +88,7 @@ webapp.directive('item', [function() {
 }]);
 
 webapp.factory('CurrentItem', function() {
-  var item = {};
+  var item;
 
   return {
     set: function (data) {

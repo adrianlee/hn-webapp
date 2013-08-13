@@ -9,6 +9,8 @@ body {
     font-size: inherit;
     -webkit-font-smoothing: antialiased;
     line-height: 1.618;
+    background-color: #E0E4CC;
+    color: #333;
 }
 
 html {
@@ -16,7 +18,9 @@ html {
 }
 
 a {
+	color: #F38630;
 	cursor: pointer;
+	text-decoration: none;
 }
 
 .font-small {
@@ -37,6 +41,12 @@ a {
 
 .float-right {
     float: right;
+}
+
+.content-items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .header-container .header {
