@@ -17,8 +17,8 @@ webapp.config(['$locationProvider', function($location) {
 
 webapp.run(function($rootScope, $location) {
   $rootScope.$on("$routeChangeStart", function (event, next, current) {
-    console.log(current);
-    console.log(next);
+    // console.log(current);
+    // console.log(next);
 
     if (typeof current == 'undefined') {
       if (next.viewer) {
