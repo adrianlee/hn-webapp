@@ -1,3 +1,75 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Source Sans Pro', Helvetica Neue, Segoe UI, trebuchet MS, Arial, sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    font-size: inherit;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.618;
+    background-color: #EDF7F2;
+    color: #333;
+}
+
+html {
+    font-size: 15px;
+}
+
+a {
+    color: #F38630;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.font-small {
+    font-size: 13px;
+}
+
+.font-normal {
+
+}
+
+.font-large {
+    font-size: 18px;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.content-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header-container .header {
+    font-weight: 400;
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.header-container .button {
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 8px;
+    padding: 10px;
+    line-height: 15px;
+}
+
+
+
+
+
+
+
+
+
 .pages-container {
     position: absolute;
     overflow: hidden;
@@ -16,7 +88,7 @@
     
     opacity: 1;
     z-index: 1;
-    background-color: #E0E4CC;
+    background-color: #EDF7F2   ;
 
     -webkit-transform: translate3d(100%, 0, 0);
     -moz-transform: translate3d(100%, 0, 0);
@@ -31,7 +103,7 @@
 
 .pages-container .page-blank {
     left: 360px;
-    background-color: #FA6900;
+    background-color: #7FC6BC;
 }
 
 .pages-container .page-home {
@@ -60,7 +132,7 @@
     left: 0;
     right: 0;
     height: 50px;
-    background-color: #FA6900;
+    background-color: #4BB5C1;
 }
 
 .pages-container .header-container  .header {
