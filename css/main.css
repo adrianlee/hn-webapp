@@ -36,11 +36,11 @@ a {
 }
 
 .float-left {
-    float: left;
+    float: left !important;
 }
 
 .float-right {
-    float: right;
+    float: right !important;
 }
 
 .content-items {

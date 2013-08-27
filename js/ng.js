@@ -3,12 +3,15 @@
 var webapp = angular.module('bojap', []);
 
 webapp.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/', {viewer: false});
-    $routeProvider.when('/profile/:itemId', {templateUrl: 'profile.html', controller: 'ProfileCtrl', viewer: true});
+    $routeProvider.when('/', { viewer: false });
+    $routeProvider.when('/tutor/', { viewer: false });
+    $routeProvider.when('/student/', { viewer: false });
+    $routeProvider.when('/student/:itemId', {templateUrl: 'profile.html', controller: 'StudentProfileCtrl', viewer: true});
+    $routeProvider.when('/tutor/:itemId', {templateUrl: 'profile.html', controller: 'TutorProfileCtrl', viewer: true});
     $routeProvider.when('/user/:username', {templateUrl: 'user.html', controller: 'UserCtrl', viewer: true});
     $routeProvider.when('/settings', {templateUrl: 'settings.html', controller: 'SettingsCtrl', viewer: true});
     $routeProvider.when('/404', {templateUrl: '404.html', viewer: false});
-    $routeProvider.otherwise({redirectTo: '/404'});
+    $routeProvider.otherwise({redirectTo: '/'});
   }]);
 
 webapp.config(['$locationProvider', function ($location) {
@@ -16,7 +19,8 @@ webapp.config(['$locationProvider', function ($location) {
     $location.hashPrefix('!');
   }]);
 
-webapp.config(['$httpProvider', function ($http){
+webapp.config(['$httpProvider', function ($http) {
+    $http.defaults.useXDomain = true;
     delete $http.defaults.headers.common['X-Requested-With'];
     $http.defaults.headers.common['Authorization'] = 'Basic anVuOjEyMw==';
     // $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode('jun:123');
@@ -24,9 +28,6 @@ webapp.config(['$httpProvider', function ($http){
 
 webapp.run(function($rootScope, $location) {
   $rootScope.$on("$routeChangeStart", function (event, next, current) {
-    // console.log(current);
-    // console.log(next);
-
     if (typeof current == 'undefined') {
       if (next.viewer) {
         $('.page-home').removeClass('show-page');
@@ -49,33 +50,54 @@ webapp.run(function($rootScope, $location) {
 });
 
 // Left Side
-webapp.controller('HomeCtrl', ['$scope', '$http', 'CurrentItem', function ($scope, $http, CurrentItem) {
-    $scope.items = [
-      { title: 'learn angular', done: true },
-      { title: 'build an angular app', done: false }
-    ];
+webapp.controller('MainCtrl', ['$scope', '$http', 'CurrentItem', function ($scope, $http, CurrentItem) {
+    $scope.template = "students.html";
+    $scope.template = "tutors.html";
+  }]);
 
+webapp.controller('StudentCtrl', ['$scope', '$http', 'CurrentItem', function ($scope, $http, CurrentItem) {
     $scope.items = [];
 
-    // $http.get('http://node-hnapi.herokuapp.com/news').success(function (data) {
-  	$http.get('http://localhost:3000/v1/profiles').success(function (data) {
+    $http.get('http://localhost:3000/v1/students').success(function (data) {
       $scope.items = data.payload;
-  	});
+    });
+
+    $scope.CurrentItem = CurrentItem;
+  }]);
+
+webapp.controller('TutorCtrl', ['$scope', '$http', 'CurrentItem', function ($scope, $http, CurrentItem) {
+    $scope.items = [];
+
+    $http.get('http://localhost:3000/v1/tutors').success(function (data) {
+      $scope.items = data.payload;
+    });
 
     $scope.CurrentItem = CurrentItem;
   }]);
 
 // Right Side
-webapp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
+webapp.controller('StudentProfileCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
     if ($routeParams.itemId) {
       $scope.itemId = $routeParams.itemId;
     }
 
     $scope.item = CurrentItem.get();
 
-    // $http.get('http://node-hnapi.herokuapp.com/item/' + $routeParams.itemId).success(function (data) {
-    $http.get('http://localhost:3000/v1/profiles/' + $routeParams.itemId).success(function (data) {
+    $http.get('http://localhost:3000/v1/students/' + $routeParams.itemId).success(function (data) {
     	$scope.item = data.payload;
+    });
+  }]);
+
+webapp.controller('TutorProfileCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
+    if ($routeParams.itemId) {
+      console.log($routeParams.itemId);
+      $scope.itemId = $routeParams.itemId;
+    }
+
+    $scope.item = CurrentItem.get();
+
+    $http.get('http://localhost:3000/v1/tutors/' + $routeParams.itemId).success(function (data) {
+      $scope.item = data.payload;
     });
   }]);
 
@@ -98,14 +120,19 @@ webapp.controller('SettingsCtrl', ['$scope', function ($scope) {
     $scope.title = "Settings";
   }]);
 
-webapp.directive('item', [function () {
+webapp.directive('studentItem', [function () {
   return {
     restrict: 'A',
-    template: '<a data-ng-click="$parent.CurrentItem.set(item);" data-ng-href="#!/profile/{{item._id}}" data-ng-bind="item.type"></a>',
-    replace: false,
-    link: function(scope, element, attrs, controller) {
-      // link setTimeout(function, milliseconds);
-    }
+    template: '<a data-ng-click="$parent.CurrentItem.set(item);" data-ng-href="#!/student/{{item._id}}" data-ng-bind="item._id"></a>',
+    replace: false
+  };
+}]);
+
+webapp.directive('tutorItem', [function () {
+  return {
+    restrict: 'A',
+    template: '<a data-ng-click="$parent.CurrentItem.set(item);" data-ng-href="#!/tutor/{{item._id}}" data-ng-bind="item._id"></a>',
+    replace: false
   };
 }]);
 

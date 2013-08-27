@@ -15,19 +15,21 @@
       <meta name="apple-touch-fullscreen" content="yes"/>
       <meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 
-      <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600"/>
+      <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600"/> -->
       <link rel="stylesheet" href="./css/normalize.css">
+      <link rel="stylesheet" href="./css/bootstrap.min.css">
       <link rel="stylesheet" href="./css/main.css">
       <!-- // <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
 
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+      <script src="./js/vendor/angular.min.js"></script>
   </head>
   <body ng-app="bojap">
-    <div class="pages-container">
+    <div class="pages-container" data-ng-controller="MainCtrl">
       <!-- Left -->
-      <div class="page page-home show-page" data-ng-controller="HomeCtrl">
+      <div class="page page-home show-page">
         <!-- Header -->
         <div class="header-container">
+          <a class="button float-left">Menu</a>
           <header class="header">
             Bojap
           </header>
@@ -35,9 +37,7 @@
 
         <!-- Content -->
         <div class="content-container">
-          <ul class="content-items">
-            <li data-ng-repeat="item in items" item="item"></li>
-          </ul>
+          <div data-ng-include src="template"></div>
         </div>
       </div>
 
@@ -46,7 +46,7 @@
         <!-- Header -->
         <div class="header-container">
           <a class="button float-left" href='/#!/'>back</a>
-          <a class="button float-right" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');">comments</a>
+          <!-- <a class="button float-right" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');">comments</a> -->
           <header class="header">
             <span>Content</span>
           </header>
@@ -56,16 +56,26 @@
         <div ng-view></div>
       </div>
 
-      <div class="page page-article-comments">
-      </div>
+      <div class="page page-article-comments"></div>
 
-      <div class="page page-blank">
-      </div>
+      <div class="page page-blank"></div>
     </div>
     
     <script src="./js/vendor/zepto.min.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/ng.js"></script>
+
+    <script type="text/ng-template" id="students.html">
+      <ul class="content-items" data-ng-controller="StudentCtrl">
+        <li data-ng-repeat="item in items" student-item="item"></li>
+      </ul>
+    </script>
+
+    <script type="text/ng-template" id="tutors.html">
+      <ul class="content-items" data-ng-controller="TutorCtrl">
+        <li data-ng-repeat="item in items" tutor-item="item"></li>
+      </ul>
+    </script>
 
     <script type="text/ng-template" id="profile.html">
       <div class="content-container">
@@ -85,10 +95,6 @@
         <hr>
         <span data-ng-bind="item | json"></span>
       </div>
-    </script>
-
-    <script type="text/ng-template" id="woo.html">
-      <a data-ng-click="$parent.CurrentItem.set(item);" data-ng-href="#!/profile/{{item._id}}" data-ng-bind="item.type"></a>
     </script>
 
     <script type="text/ng-template" id="settings.html">
