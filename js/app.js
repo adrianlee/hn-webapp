@@ -114,10 +114,11 @@ webapp.controller('StudentCtrl', ['$scope', '$http', 'CurrentItem', function ($s
       "_created": "2013-08-28T14:19:22.188Z",
       "title": "Looking for a Math Female Tutor near Tai Po",
       "location": "Tai Po",
-      "duration": "4 times a week",
+      "duration": "4 hrs / wk",
       "price": 200,
       "subject": "DSE",
       "gender": "female",
+      "grade": "Form 3",
       "tags": ["tag1", "tag2", "tag3"]
     },
     { 
@@ -134,8 +135,8 @@ webapp.controller('StudentCtrl', ['$scope', '$http', 'CurrentItem', function ($s
       "__v": 0,
       "_created": "2013-08-29T14:19:22.188Z",
       "title": "Looking for a Math Female Tutor near Tai Po",
-      "location": "Tai Po",
-      "duration": "4 times a week",
+      "location": "Tai Po, New Territories",
+      "duration": "4 times a week that is awesome",
       "price": 200,
       "subject": "DSE",
       "gender": "female",

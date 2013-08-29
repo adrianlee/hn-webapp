@@ -24,20 +24,25 @@
 
       <script src="./js/vendor/angular.min.js"></script>
   </head>
+
   <body ng-app="bojap">
     <div class="pages-container" data-ng-controller="MainCtrl">
       <!-- Left -->
       <div class="page page-home show-page">
         <!-- Header -->
         <div class="header-container">
-          <a class="button left" onclick="$('.menu').toggleClass('hidden');"><i class="icon-list"></i></a>
-          <a class="button right" data-ng-click="menu('login')"><i class="icon-pencil"></i></a>
+          <!-- Menu Button -->
+          <a class="button left" onclick="$('.menu').toggleClass('hidden');"><i class="icon-reorder"> menu</i></a>
+          <!-- Menu -->
           <div class="menu hidden">
             <ul class="list-unstyled">
               <a data-ng-click="menu('student')"><li>Find a Student</li></a>
               <a data-ng-click="menu('tutor')"><li>Find a Tutor</li></a>
             </ul>
           </div>
+          <!-- Create Post Button -->
+          <a class="button right" data-ng-click="menu('login')"><i class="icon-pencil"> post</i></a>
+          <!-- Title -->
           <header class="header">
             <a href="/#!/">Jumbo</a>
           </header>
@@ -54,8 +59,8 @@
       <div class="page page-article-content">
         <!-- Header -->
         <div class="header-container">
-          <a class="button float-left" onclick="history.back()">back</a>
-          <!-- <a class="button float-right" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');">comments</a> -->
+          <a class="button left" onclick="history.back()"><i class="icon-step-backward"> back</i></a>
+          <a class="button right" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');"><i class="icon-comment-alt"> contact</i></a>
           <header class="header">
             <span>Content</span>
           </header>
@@ -102,37 +107,40 @@
     <script type="text/ng-template" id="item.html">
       <a data-ng-click="$parent.CurrentItem.set(item);" data-ng-href="#!/{{type}}/{{item._id}}">
         <li class="primary-item">
+          <!--
           <h1 data-ng-bind="item.title"></h1>
+          -->
+          <ul class="list-unstyled">
+            <li>
+              <div class="icon"><i class="icon-map-marker"></i></div>
+              <span class="text" data-ng-bind="item.location"></span>
+            </li>
+            <li>
+              <div class="icon"><i class="icon-book"></i></div>
+              <span class="text" data-ng-bind="item.subject"></span>
+            </li>
+            <li>
+              <div class="icon"><i class="icon-bookmark"></i></div>
+              <span class="text" data-ng-bind="item.grade"></span>
+            </li>
+            <li>
+              <div class="icon"><i class="icon-male"></i></div>
+              <span class="text" data-ng-bind="item.gender"></span>
+            </li>
+            <li>
+              <div class="icon"><i class="icon-time"></i></div>
+              <span class="text" data-ng-bind="item.duration"></span>
+            </li>
+            <li>
+              <div class="icon"><i class="icon-dollar"></i></div>
+              <span class="text" data-ng-bind="item.price"></span>
+            </li>
+          </ul>
+
+          <div style="clear:both">
+
           <div class="meta">
             posted by <span data-ng-bind="item._creator.username"></span> <span data-ng-bind="item._created | moment"></span>
-          </div>
-          <div class="row">
-            <div class="span50">
-              <div class="grid">
-                <i class="icon icon-map-marker"></i>
-                <span class="text" data-ng-bind="item.location"></span>
-              </div>
-            </div>
-            <div class="span50">
-              <div class="grid">
-                <i class="icon icon-pencil"></i>
-                <span class="text" data-ng-bind="item.subject"></span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="span50">
-              <div class="grid">
-                <i class="icon icon-time"></i>
-                <span class="text" data-ng-bind="item.duration"></span>
-              </div>
-            </div>
-            <div class="span50">
-              <div class="grid">
-                <i class="icon icon-dollar"></i>
-                <span class="text" data-ng-bind="item.price"></span>
-              </div>
-            </div>
           </div>
         </li> 
       </a>
@@ -143,8 +151,6 @@
       <div class="content-container">
         <h3 data-ng-bind="item._creator.fullname"></h3>
         <a data-ng-href="#!/user/{{item._creator.username}}" data-ng-bind="item._creator.fullname"></a>
-        <hr>
-        <span data-ng-repeat="comment in item.comments"><span ng-bind-html-unsafe="comment.content"></span></span>
         <hr>
         <span data-ng-bind="item | json"></span>
       </div>
@@ -161,7 +167,7 @@
 
     <script type="text/ng-template" id="settings.html">
       <div class="content-container">
-        <3
+        <span>hello</span>
       </div>
     </script>
 
