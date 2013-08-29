@@ -4,10 +4,8 @@ var webapp = angular.module('bojap', []);
 
 webapp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', { viewer: false });
-    $routeProvider.when('/tutor/', { viewer: false });
-    $routeProvider.when('/student/', { viewer: false });
-    $routeProvider.when('/student/:itemId', {templateUrl: 'profile.html', controller: 'StudentProfileCtrl', viewer: true});
     $routeProvider.when('/tutor/:itemId', {templateUrl: 'profile.html', controller: 'TutorProfileCtrl', viewer: true});
+    $routeProvider.when('/student/:itemId', {templateUrl: 'profile.html', controller: 'StudentProfileCtrl', viewer: true});
     $routeProvider.when('/user/:username', {templateUrl: 'user.html', controller: 'UserCtrl', viewer: true});
     $routeProvider.when('/settings', {templateUrl: 'settings.html', controller: 'SettingsCtrl', viewer: true});
     $routeProvider.when('/404', {templateUrl: '404.html', viewer: false});
@@ -50,75 +48,120 @@ webapp.run(function($rootScope, $location) {
 });
 
 // Left Side
-webapp.controller('MainCtrl', ['$scope', '$http', 'CurrentItem', function ($scope, $http, CurrentItem) {
-    $scope.template = "students.html";
-    $scope.template = "tutors.html";
-  }]);
+webapp.controller('MainCtrl', ['$scope', 'screenService', function ($scope, screenService) {
+  $scope.template = screenService.getScreen();
+
+  $scope.menu = function (screen) {
+    $('.menu').addClass('hidden');
+    screenService.setScreen(screen);
+    $scope.template = screenService.getScreen();
+  }
+}]);
+
+webapp.factory('screenService', [function() {
+  var screens = {
+    student: "students.html",
+    tutor: "tutors.html",
+    login: "login.html"
+  };
+
+  var currentScreen = screens.student;
+
+  return {
+    getScreen: function () {
+      return currentScreen;
+    },
+    setScreen: function (screen) {
+      currentScreen = screens[screen];
+    }
+  }
+}]);
+
+webapp.controller('LoginCtrl', ['$scope', '$http', 'Base64', function ($scope, $http, Base64) {
+  $scope.input = {};
+
+  $scope.submit = function (input) {
+    $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(input.username + ':' + input.password);
+    $http.get('http://localhost:3000/v1/me').
+      success(function (data) {
+        // success
+        console.log(data);
+      }).
+      error(function (data) {
+        // error
+        console.log(data);
+      });
+  };
+}]);
 
 webapp.controller('StudentCtrl', ['$scope', '$http', 'CurrentItem', function ($scope, $http, CurrentItem) {
-    $scope.items = [];
+  $scope.items = [];
+  $('#loading').show();
 
-    $http.get('http://localhost:3000/v1/students').success(function (data) {
-      $scope.items = data.payload;
-    });
+  $http.get('http://localhost:3000/v1/students').success(function (data) {
+    $('#loading').hide();
+    $scope.items = data.payload;
+  });
 
-    $scope.CurrentItem = CurrentItem;
-  }]);
+  $scope.CurrentItem = CurrentItem;
+}]);
 
 webapp.controller('TutorCtrl', ['$scope', '$http', 'CurrentItem', function ($scope, $http, CurrentItem) {
-    $scope.items = [];
+  $scope.items = [];
+  $('#loading').show();
 
-    $http.get('http://localhost:3000/v1/tutors').success(function (data) {
-      $scope.items = data.payload;
-    });
+  $http.get('http://localhost:3000/v1/tutors').success(function (data) {
+    $('#loading').hide();
+    $scope.items = data.payload;
+  });
 
-    $scope.CurrentItem = CurrentItem;
-  }]);
+  $scope.CurrentItem = CurrentItem;
+}]);
 
 // Right Side
 webapp.controller('StudentProfileCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
-    if ($routeParams.itemId) {
-      $scope.itemId = $routeParams.itemId;
-    }
+  if ($routeParams.itemId) {
+    $scope.itemId = $routeParams.itemId;
+  }
 
-    $scope.item = CurrentItem.get();
+  $scope.item = CurrentItem.get();
 
-    $http.get('http://localhost:3000/v1/students/' + $routeParams.itemId).success(function (data) {
-    	$scope.item = data.payload;
-    });
-  }]);
+  $http.get('http://localhost:3000/v1/students/' + $routeParams.itemId).success(function (data) {
+  	$scope.item = data.payload;
+  });
+}]);
 
 webapp.controller('TutorProfileCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
-    if ($routeParams.itemId) {
-      console.log($routeParams.itemId);
-      $scope.itemId = $routeParams.itemId;
-    }
+  if ($routeParams.itemId) {
+    console.log($routeParams.itemId);
+    $scope.itemId = $routeParams.itemId;
+  }
 
-    $scope.item = CurrentItem.get();
+  $scope.item = CurrentItem.get();
 
-    $http.get('http://localhost:3000/v1/tutors/' + $routeParams.itemId).success(function (data) {
-      $scope.item = data.payload;
-    });
-  }]);
+  $http.get('http://localhost:3000/v1/tutors/' + $routeParams.itemId).success(function (data) {
+    $scope.item = data.payload;
+  });
+}]);
 
 webapp.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
-    if ($routeParams.username) {
-      $scope.username = $routeParams.username;
-    }
+  if ($routeParams.username) {
+    $scope.username = $routeParams.username;
+  }
 
-    $scope.item = CurrentItem.get();
+  $scope.item = CurrentItem.get();
 
-    // $http.get('http://node-hnapi.herokuapp.com/item/' + $routeParams.itemId).success(function (data) {
-    $http.get('http://localhost:3000/v1/users/' + $routeParams.username).success(function (data) {
-      $scope.item = data.payload;
-    });
-  }]);
+  // $http.get('http://node-hnapi.herokuapp.com/item/' + $routeParams.itemId).success(function (data) {
+  $http.get('http://localhost:3000/v1/users/' + $routeParams.username).success(function (data) {
+    $scope.item = data.payload;
+  });
+}]);
 
 // Settings
 webapp.controller('SettingsCtrl', ['$scope', function ($scope) {
-    console.log('Settings');
-    $scope.title = "Settings";
-  }]);
+  console.log('Settings');
+  $scope.title = "Settings";
+}]);
 
 webapp.directive('studentItem', [function () {
   return {

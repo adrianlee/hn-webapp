@@ -43,10 +43,33 @@ a {
     float: right !important;
 }
 
-.content-items {
+.list-unstyled, .content-items {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+#loading {
+    background-image: url('../img/loading.gif');
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    margin-left: -16px;
+    margin-top: -16px;
+    z-index: 100px;
+    height: 31px;
+    width: 31px;
+}
+
+.header-container {
+    font-weight: 200;
+    font-size: 16px;
+    color: #FFF;
 }
 
 .header-container .header {
@@ -56,14 +79,89 @@ a {
 }
 
 .header-container .button {
-    background-color: rgba(255, 255, 255, 0.6);
-    margin: 8px;
-    padding: 10px;
-    line-height: 15px;
+    /*background-color: rgba(255, 255, 255, 0.6);*/
+    margin: 5px;
+    padding: 0 10px;
+    height: 40px;
+    line-height: 40px;
+    text-transform: lowercase;
+    color: #FFF;
+    background-color: rgba(255, 255 ,255, 0.2);
+    border-radius: 3px;
 }
 
+.header-container .left {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
+.header-container .right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
+.header-container .menu {
+    position: absolute;
+    width: 40%;
+    top: 55px;
+    left: 5px;
+    background-color: #4BB5C1;
+    border-radius: 3px;
+    z-index: 100;
+
+    -webkit-transition: visibility 400ms ease, opacity 400ms ease;
+    -moz-transition: all 400ms ease;
+    -ms-transition: all 400ms ease;
+    transition: all 400ms ease;
+}
+
+.header-container .menu ul a li {
+    padding: 10px 10px;
+    color: #fff;
+    border-bottom: 1px solid #7FC6BC;
+}
+
+.content-container {
+    padding: 5px;
+}
+
+.login {
+    display: block;
+    width: 100%;
+}
+
+.login input {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 30px;
+    border-radius: 3px;
+    border: 0px solid #cccccc;
+
+    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.login button {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 30px;
+    border-radius: 3px;
+    padding-left: 0;
+    padding-right: 0;
+    border: 0px solid #cccccc;
+    font-weight: 100;
+    color: #fff;
+    background-color: #4BB5C1;
+}
 
 
 
@@ -88,7 +186,7 @@ a {
     
     opacity: 1;
     z-index: 1;
-    background-color: #EDF7F2   ;
+    background-color: #EDF7F2;
 
     -webkit-transform: translate3d(100%, 0, 0);
     -moz-transform: translate3d(100%, 0, 0);
