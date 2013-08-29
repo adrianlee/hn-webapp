@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="utf-8">
-      <title>Bojap</title>
+      <title>Tutor</title>
       <meta name="fragment" content="!">
       <meta name="description" content="">
       <meta name="HandheldFriendly" content="True">
@@ -15,11 +15,12 @@
       <meta name="apple-touch-fullscreen" content="yes"/>
       <meta name="viewport" content="initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 
-      <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600"/> -->
+      <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600"/>
       <link rel="stylesheet" href="./css/normalize.css">
       <!-- <link rel="stylesheet" href="./css/bootstrap.min.css"> -->
       <link rel="stylesheet" href="./css/main.css">
       <!-- // <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
+      <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
       <script src="./js/vendor/angular.min.js"></script>
   </head>
@@ -29,17 +30,16 @@
       <div class="page page-home show-page">
         <!-- Header -->
         <div class="header-container">
-          <a class="button left" onclick="$('.menu').toggleClass('hidden');">Menu</a>
-          <a class="button right" data-ng-click="menu('login')">Login</a>
+          <a class="button left" onclick="$('.menu').toggleClass('hidden');"><i class="icon-list"></i></a>
+          <a class="button right" data-ng-click="menu('login')"><i class="icon-pencil"></i></a>
           <div class="menu hidden">
             <ul class="list-unstyled">
-              <a data-ng-click="menu('student')"><li>Students</li></a>
-              <a data-ng-click="menu('tutor')"><li>Tutors</li></a>
-              <!-- <a data-ng-click="menu('login')"><li>Login</li></a> -->
+              <a data-ng-click="menu('student')"><li>Find a Student</li></a>
+              <a data-ng-click="menu('tutor')"><li>Find a Tutor</li></a>
             </ul>
           </div>
           <header class="header">
-            Bojap
+            <a href="/#!/">Jumbo</a>
           </header>
         </div>
 
@@ -71,31 +71,74 @@
     </div>
     
     <script src="./js/vendor/zepto.min.js"></script>
+    <script src="./js/vendor/moment.min.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/app.js"></script>
 
+    <!-- PRIMARY SCREENS -->
     <script type="text/ng-template" id="login.html">
       <div data-ng-controller="LoginCtrl">
         <form class="login">
           <input type="text" placeholder="username" data-ng-model="input.username" />
           <input type="password" placeholder="password" data-ng-model="input.password" />
           <button type="submit" data-ng-click="submit(input)">login</button>
+          <!-- <button type="submit" data-ng-click="menu('tutor')">register</button> -->
         </form>
       </div> 
     </script>
 
     <script type="text/ng-template" id="students.html">
       <ul class="content-items" data-ng-controller="StudentCtrl">
-        <li data-ng-repeat="item in items" student-item="item"></li>
+        <li data-ng-repeat="item in items" student-item></li>
       </ul>
     </script>
 
     <script type="text/ng-template" id="tutors.html">
       <ul class="content-items" data-ng-controller="TutorCtrl">
-        <li data-ng-repeat="item in items" tutor-item="item"></li>
+        <li data-ng-repeat="item in items" tutor-item></li>
       </ul>
     </script>
 
+    <script type="text/ng-template" id="item.html">
+      <a data-ng-click="$parent.CurrentItem.set(item);" data-ng-href="#!/{{type}}/{{item._id}}">
+        <li class="primary-item">
+          <h1 data-ng-bind="item.title"></h1>
+          <div class="meta">
+            posted by <span data-ng-bind="item._creator.username"></span> <span data-ng-bind="item._created | moment"></span>
+          </div>
+          <div class="row">
+            <div class="span50">
+              <div class="grid">
+                <i class="icon icon-map-marker"></i>
+                <span class="text" data-ng-bind="item.location"></span>
+              </div>
+            </div>
+            <div class="span50">
+              <div class="grid">
+                <i class="icon icon-pencil"></i>
+                <span class="text" data-ng-bind="item.subject"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span50">
+              <div class="grid">
+                <i class="icon icon-time"></i>
+                <span class="text" data-ng-bind="item.duration"></span>
+              </div>
+            </div>
+            <div class="span50">
+              <div class="grid">
+                <i class="icon icon-dollar"></i>
+                <span class="text" data-ng-bind="item.price"></span>
+              </div>
+            </div>
+          </div>
+        </li> 
+      </a>
+    </script>
+
+    <!-- SECONDARY SCREENS -->
     <script type="text/ng-template" id="profile.html">
       <div class="content-container">
         <h3 data-ng-bind="item._creator.fullname"></h3>

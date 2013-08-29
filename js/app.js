@@ -26,6 +26,8 @@ webapp.config(['$httpProvider', function ($http) {
 
 webapp.run(function($rootScope, $location) {
   $rootScope.$on("$routeChangeStart", function (event, next, current) {
+    $('#loading').hide();
+
     if (typeof current == 'undefined') {
       if (next.viewer) {
         $('.page-home').removeClass('show-page');
@@ -52,6 +54,7 @@ webapp.controller('MainCtrl', ['$scope', 'screenService', function ($scope, scre
   $scope.template = screenService.getScreen();
 
   $scope.menu = function (screen) {
+    $('#loading').hide();
     $('.menu').addClass('hidden');
     screenService.setScreen(screen);
     $scope.template = screenService.getScreen();
@@ -95,25 +98,80 @@ webapp.controller('LoginCtrl', ['$scope', '$http', 'Base64', function ($scope, $
 }]);
 
 webapp.controller('StudentCtrl', ['$scope', '$http', 'CurrentItem', function ($scope, $http, CurrentItem) {
-  $scope.items = [];
-  $('#loading').show();
+  $scope.items = [
+    { 
+      "_creator": {
+        "__v": 0,
+        "_id": "521a60fcde8af2d3d8000001",
+        "fullname": "Jun",
+        "username":
+        "jun",
+        "_created":
+        "2013-08-29T14:19:22.188Z"
+      },
+      "_id": "521bdf7b9c6875432c000002",
+      "__v": 0,
+      "_created": "2013-08-28T14:19:22.188Z",
+      "title": "Looking for a Math Female Tutor near Tai Po",
+      "location": "Tai Po",
+      "duration": "4 times a week",
+      "price": 200,
+      "subject": "DSE",
+      "gender": "female",
+      "tags": ["tag1", "tag2", "tag3"]
+    },
+    { 
+      "_creator": {
+        "__v": 0,
+        "_id": "521a60fcde8af2d3d8000001",
+        "fullname": "Jun",
+        "username":
+        "jun",
+        "_created":
+        "2013-08-29T14:19:22.188Z"
+      },
+      "_id": "521bdf7b9c6875432c000002",
+      "__v": 0,
+      "_created": "2013-08-29T14:19:22.188Z",
+      "title": "Looking for a Math Female Tutor near Tai Po",
+      "location": "Tai Po",
+      "duration": "4 times a week",
+      "price": 200,
+      "subject": "DSE",
+      "gender": "female",
+      "tags": ["tag1", "tag2", "tag3"]
+    }
+  ];
+  $scope.type = "student";  // for directive studentItem link
 
-  $http.get('http://localhost:3000/v1/students').success(function (data) {
-    $('#loading').hide();
-    $scope.items = data.payload;
-  });
+  // $('#loading').show();
+
+  // $http.get('http://localhost:3000/v1/students').
+  //   success(function (data) {
+  //     $('#loading').hide();
+  //     $scope.items = data.payload;
+  //   }).
+  //   error(function (data) {
+  //     console.log(data);
+  //   });
 
   $scope.CurrentItem = CurrentItem;
 }]);
 
 webapp.controller('TutorCtrl', ['$scope', '$http', 'CurrentItem', function ($scope, $http, CurrentItem) {
   $scope.items = [];
+  $scope.type = "tutor";  // for directive tutorItem link
+
   $('#loading').show();
 
-  $http.get('http://localhost:3000/v1/tutors').success(function (data) {
-    $('#loading').hide();
-    $scope.items = data.payload;
-  });
+  $http.get('http://localhost:3000/v1/tutors').
+    success(function (data) {
+      $('#loading').hide();
+      $scope.items = data.payload;
+    }).
+    error(function (data) {
+      console.log(data);
+    });
 
   $scope.CurrentItem = CurrentItem;
 }]);
@@ -126,9 +184,13 @@ webapp.controller('StudentProfileCtrl', ['$scope', '$http', '$routeParams', 'Cur
 
   $scope.item = CurrentItem.get();
 
-  $http.get('http://localhost:3000/v1/students/' + $routeParams.itemId).success(function (data) {
-  	$scope.item = data.payload;
-  });
+  $http.get('http://localhost:3000/v1/students/' + $routeParams.itemId).
+    success(function (data) {
+  	 $scope.item = data.payload;
+    }).
+    error(function (data) {
+     console.log(data);
+    });
 }]);
 
 webapp.controller('TutorProfileCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
@@ -139,9 +201,13 @@ webapp.controller('TutorProfileCtrl', ['$scope', '$http', '$routeParams', 'Curre
 
   $scope.item = CurrentItem.get();
 
-  $http.get('http://localhost:3000/v1/tutors/' + $routeParams.itemId).success(function (data) {
-    $scope.item = data.payload;
-  });
+  $http.get('http://localhost:3000/v1/tutors/' + $routeParams.itemId).
+    success(function (data) {
+      $scope.item = data.payload;
+    }).
+    error(function (data) {
+      console.log(data);
+    });
 }]);
 
 webapp.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
@@ -151,10 +217,13 @@ webapp.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem',
 
   $scope.item = CurrentItem.get();
 
-  // $http.get('http://node-hnapi.herokuapp.com/item/' + $routeParams.itemId).success(function (data) {
-  $http.get('http://localhost:3000/v1/users/' + $routeParams.username).success(function (data) {
-    $scope.item = data.payload;
-  });
+  $http.get('http://localhost:3000/v1/users/' + $routeParams.username).
+    success(function (data) {
+      $scope.item = data.payload;
+    }).
+    error(function (data) {
+      console.log(data);
+    });
 }]);
 
 // Settings
@@ -166,7 +235,7 @@ webapp.controller('SettingsCtrl', ['$scope', function ($scope) {
 webapp.directive('studentItem', [function () {
   return {
     restrict: 'A',
-    template: '<a data-ng-click="$parent.CurrentItem.set(item);" data-ng-href="#!/student/{{item._id}}" data-ng-bind="item._id"></a>',
+    templateUrl: 'item.html',
     replace: false
   };
 }]);
@@ -174,7 +243,7 @@ webapp.directive('studentItem', [function () {
 webapp.directive('tutorItem', [function () {
   return {
     restrict: 'A',
-    template: '<a data-ng-click="$parent.CurrentItem.set(item);" data-ng-href="#!/tutor/{{item._id}}" data-ng-bind="item._id"></a>',
+    templateUrl: 'item.html',
     replace: false
   };
 }]);
@@ -273,3 +342,9 @@ webapp.factory('Base64', [function () {
     }
   };
 }]);
+
+webapp.filter('moment', function () {
+  return function (item) {
+    return moment(item).fromNow();
+  };
+});

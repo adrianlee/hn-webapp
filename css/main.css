@@ -69,7 +69,11 @@ a {
 .header-container {
     font-weight: 200;
     font-size: 16px;
-    color: #FFF;
+    color: #fff;
+}
+
+.header-container a {
+    color: #fff;
 }
 
 .header-container .header {
@@ -85,7 +89,6 @@ a {
     height: 40px;
     line-height: 40px;
     text-transform: lowercase;
-    color: #FFF;
     background-color: rgba(255, 255 ,255, 0.2);
     border-radius: 3px;
 }
@@ -119,17 +122,17 @@ a {
 
 .header-container .menu ul a li {
     padding: 10px 10px;
-    color: #fff;
     border-bottom: 1px solid #7FC6BC;
+    border-radius: 3px;
 }
 
 .content-container {
-    padding: 5px;
+    display: block;
+    width: 100%;
 }
 
 .login {
-    display: block;
-    width: 100%;
+    padding: 5px;
 }
 
 .login input {
@@ -163,7 +166,53 @@ a {
     background-color: #4BB5C1;
 }
 
+.primary-item {
+    position: relative;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
 
+.primary-item h1 { 
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0px;
+    padding: 0px;
+}
+
+.primary-item .meta {
+    color: #333;
+    font-size: 12px;
+}
+
+.row:after {
+    clear: both;
+}
+
+.row:before,
+.row:after {
+  display: table;
+  content: " ";
+}
+
+.span50 {
+    position: relative;
+    float: left;
+    width: 50%;
+}
+
+.grid {
+    background-color: #fff;
+    margin-left: 1px;
+    margin-bottom: 1px;
+    padding: 2px 10px;
+}
+
+.grid .text {
+    position: absolute;
+    left: 30px;
+}
 
 
 
@@ -258,6 +307,7 @@ a {
 
     .pages-container .page-home {
         width: 360px;
+
         -webkit-transform: translate(0, 0);
         -moz-transform: translate(0, 0);
         -ms-transform: translate(0, 0);
