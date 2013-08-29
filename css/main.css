@@ -22,6 +22,32 @@ a {
     text-decoration: none;
 }
 
+/* For IE10, disable double-tap-to-zoom */
+a, input, button {
+    -ms-touch-action: none !important;
+}
+
+/* Headings */
+
+h1, h2 {
+    margin: 0px;
+    padding: 0px;
+}
+
+h1 {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 400;
+}
+
+/* Font Sizes */
+
 .font-small {
     font-size: 13px;
 }
@@ -59,6 +85,8 @@ a {
     height: 31px;
     width: 31px;
 }
+
+/* Header bar */
 
 .header-container {
     font-weight: 200;
@@ -134,10 +162,54 @@ a {
     border-radius: 3px;
 }
 
-.content-container {
-    display: block;
-    width: 100%;
+/* Content */
+
+.primary-container {
+
 }
+
+.secondary-container {
+    margin: 5px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+
+/* Items on Primary screen */
+
+.primary-item {
+    position: relative;
+    padding: 10px;
+    margin: 5px;
+    color: #333;
+    background-color: #FFF;
+}
+
+.primary-item ul li {
+    float: left;
+    width: 50%;
+    white-space: nowrap;
+}
+
+.primary-item ul li .icon {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+}
+
+.primary-item ul li span {
+    display: inline-block;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.primary-item .meta {
+    font-size: 12px;
+}
+
+
+/* Login Page */
 
 .login {
     padding: 5px;
@@ -154,8 +226,8 @@ a {
     border: 0px solid #cccccc;
 
     -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .login button {
@@ -174,46 +246,9 @@ a {
     background-color: #4BB5C1;
 }
 
-.primary-item {
-    position: relative;
-    padding: 10px;
-    margin: 2px;
-    color: #333;
-    background-color: #FFF;
-}
-
-.primary-item h1 { 
-    font-size: 16px;
-    font-weight: 400;
-    margin: 0px;
-    padding: 0px;
-}
 
 
-.primary-item ul li {
-    float: left;
-    width: 50%;
-    white-space: nowrap;
-}
-
-.primary-item ul li span {
-    display: inline-block;
-    width: 80%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.primary-item .meta {
-    font-size: 12px;
-}
-
-.icon {
-    display: inline-block;
-    width: 20px;
-    text-align: center;
-}
-
-
+/* Pages */
 
 .pages-container {
     position: absolute;
@@ -280,12 +315,12 @@ a {
     background-color: #4BB5C1;
 }
 
-.pages-container .header-container  .header {
+.pages-container .header-container .header {
     text-align: center;
     line-height: 50px;
 }
 
-.pages-container .content-container {
+.pages-container .primary-container, .pages-container .secondary-container {
     position: absolute;
     top: 50px;
     left: 0;
@@ -294,6 +329,8 @@ a {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
+
+/* Media Queries */
 
 @media only screen and (min-width : 550px) {
     .primary-item ul li {
