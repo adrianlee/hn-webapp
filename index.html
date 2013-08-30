@@ -21,8 +21,6 @@
       <link rel="stylesheet" href="./css/main.css">
       <!-- // <script src="js/vendor/modernizr-2.6.2.min.js"></script> -->
       <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
-      <script src="./js/vendor/angular.min.js"></script>
   </head>
 
   <body ng-app="bojap">
@@ -76,15 +74,20 @@
       <div class="page page-blank"></div>
     </div>
     
+    <!--
     <script type="application/javascript" src="./js/vendor/zepto.min.js"></script>
+    <script type="application/javascript" src="./js/vendor/zepto.cookie.min.js"></script>
     <script type="application/javascript" src="./js/vendor/moment.min.js"></script>
     <script type="application/javascript" src="./js/vendor/fastclick.min.js"></script>
+    <script type="application/javascript" src="./js/vendor/angular.min.js"></script>
+    -->
+    <script type="application/javascript" src="./js/lib.js"></script>
     <script type="text/javascript">
       window.addEventListener('load', function() {
           FastClick.attach(document.body);
       }, false);
     </script>
-    <script type='application/javascript' src="./js/main.js"></script>
+    <!--<script type='application/javascript' src="./js/main.js"></script>-->
     <script type='application/javascript' src="./js/app.js"></script>
 
     <!-- PRIMARY SCREENS -->
@@ -170,9 +173,9 @@
     <script type="text/ng-template" id="settings.html">
       <div class="secondary-container" data-ng-controller="SettingsCtrl">
         Font Size: 
-        <a data-ng-click="setFontSize(0)">Small</a>
-        <a data-ng-click="setFontSize(1)">Normal</a>
-        <a data-ng-click="setFontSize(2)">Large</a>
+        <a data-ng-click="setFontSize('small')">Small</a>
+        <a data-ng-click="setFontSize('normal')">Normal</a>
+        <a data-ng-click="setFontSize('large')">Large</a>
       </div>
     </script>
 

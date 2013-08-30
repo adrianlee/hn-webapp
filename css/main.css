@@ -275,10 +275,10 @@ h2 {
     -ms-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
 
-    -webkit-transition: -webkit-transform 400ms ease, opacity 400ms ease;
-    -moz-transition: all 400ms ease;
-    -ms-transition: all 400ms ease;
-    transition: all 400ms ease;
+    -webkit-transition: -webkit-transform 400ms ease, opacity 400ms ease, font-size 0;
+    -moz-transition: all 400ms ease, font-size 0;
+    -ms-transition: all 400ms ease, font-size 0;
+    transition: all 400ms ease, font-size 0;
 }
 
 .pages-container .page-blank {

@@ -51,9 +51,14 @@ webapp.run(function($rootScope, $location) {
 });
 
 // Left Side
-webapp.controller('MainCtrl', ['$scope', 'screenService', function ($scope, screenService) {
+webapp.controller('MainCtrl', ['$scope', 'screenService', 'fontSize', function ($scope, screenService, fontSize) {
   $scope.template = screenService.getScreen();
   $scope.secondaryTitle = "Content";
+
+  $(function () {
+    var size = fontSize.get();
+    fontSize.set(size);
+  });
 
   $scope.menu = function (screen) {
     $('#loading').hide();
@@ -240,28 +245,47 @@ webapp.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem',
 }]);
 
 // Settings
-webapp.controller('SettingsCtrl', ['$scope', function ($scope) {
+webapp.controller('SettingsCtrl', ['$scope', 'fontSize', function ($scope, fontSize) {
   $scope.setSecondaryTitle('Settings')
 
-  $scope.setFontSize = function (size) {
-    $('body').removeClass('font-small').removeClass('font-normal').removeClass('font-large');
-    switch(size) {
-      case 0:
-        $('body').addClass('font-small');
-        break;
-      case 1:
-        $('body').addClass('font-normal');
-        break;
-      case 2: 
-        $('body').addClass('font-large');
-        break;
-    }
-  };
+  $scope.setFontSize = fontSize.set;
 
   $scope.setLanguage = function (language) {
     // not implemented yet
   };
 }]);
+
+webapp.factory('fontSize', function () {
+  var setFontSize = function (size) {
+    $('body').removeClass('font-small').removeClass('font-normal').removeClass('font-large');
+    switch(size) {
+      case "small":
+        $.fn.cookie("fontSize", "small");
+        $('body').addClass('font-small');
+        break;
+      case "normal":
+        $.fn.cookie("fontSize", "normal");
+        $('body').addClass('font-normal');
+        break;
+      case "large": 
+        $.fn.cookie("fontSize", "large");
+        $('body').addClass('font-large');
+        break;
+      default:
+        $.fn.cookie("fontSize", "normal");
+        $('body').addClass('font-normal');
+    }
+  }
+
+  var getFontSize = function () {
+    return $.fn.cookie("fontSize");
+  }
+
+  return {
+    get: getFontSize,
+    set: setFontSize
+  }
+});
 
 webapp.directive('studentItem', [function () {
   return {
