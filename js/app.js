@@ -31,21 +31,21 @@ webapp.run(function($rootScope, $location) {
 
     if (typeof current == 'undefined') {
       if (next.viewer) {
-        $('.page-home').removeClass('show-page');
-        $('.page-article-content').addClass('show-page'); 
+        $('.page-primary').removeClass('show-page');
+        $('.page-secondary').addClass('show-page'); 
       } else {
-        $('.page-home').addClass('show-page');
-        $('.page-article-content').removeClass('show-page');
+        $('.page-primary').addClass('show-page');
+        $('.page-secondary').removeClass('show-page');
       }
       return;
     }
 
     if (current.viewer && !next.viewer) {
-      $('.page-home').addClass('show-page');
-      $('.page-article-content').removeClass('show-page');
+      $('.page-primary').addClass('show-page');
+      $('.page-secondary').removeClass('show-page');
     } else if (!current.viewer && next.viewer) {
-      $('.page-home').removeClass('show-page');
-      $('.page-article-content').addClass('show-page'); 
+      $('.page-primary').removeClass('show-page');
+      $('.page-secondary').addClass('show-page'); 
     }
   });
 });

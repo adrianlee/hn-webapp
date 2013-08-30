@@ -24,11 +24,11 @@
   </head>
 
   <body ng-app="bojap">
-    <div class="pages-container" data-ng-controller="MainCtrl">
+    <div class="main" data-ng-controller="MainCtrl">
       <!-- Primary -->
-      <div class="page page-home show-page">
+      <div class="page page-primary show-page">
         <!-- Header -->
-        <div class="header-container">
+        <div class="nav">
           <!-- Menu Button -->
           <a class="button left" onclick="$('.menu').toggleClass('hidden');"><i class="icon-reorder"> menu</i></a>
           <!-- Menu -->
@@ -55,11 +55,11 @@
       </div>
 
       <!-- Secondary -->
-      <div class="page page-article-content">
+      <div class="page page-secondary">
         <!-- Header -->
-        <div class="header-container">
+        <div class="nav">
           <a class="button left" onclick="history.back()"><i class="icon-step-backward"> back</i></a>
-          <a class="button right" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');"><i class="icon-comment-alt"> contact</i></a>
+          <a class="button right" onclick="$('.page-secondary').toggleClass('show-page'); $('.page-tertiary').toggleClass('show-page');"><i class="icon-comment-alt"> contact</i></a>
           <header class="header">
             <span data-ng-bind="secondaryTitle"></span>
           </header>
@@ -69,7 +69,7 @@
         <div ng-view></div>
       </div>
 
-      <div class="page page-article-comments"></div>
+      <div class="page page-tertiary"></div>
 
       <div class="page page-blank"></div>
     </div>
@@ -157,7 +157,11 @@
     <script type="text/ng-template" id="profile.html">
       <div class="secondary-container">
         <h1>Student Profile</h1>
-        <a data-ng-href="#!/user/{{item._creator.username}}" data-ng-bind="item._creator.fullname"></a>
+        <ul>
+          <li>Fullname: <span data-ng-bind="item._creator.fullname"></span></li>
+          <li>Username: <a data-ng-href="#!/user/{{item._creator.username}}" data-ng-bind="item._creator.username"></a></li>
+        </ul>
+
         <p data-ng-bind="item | json"></p>
       </div>
     </script>
@@ -177,6 +181,9 @@
         <a data-ng-click="setFontSize('normal')">Normal</a>
         <a data-ng-click="setFontSize('large')">Large</a>
       </div>
+
+      <!-- Change Language -->
+      <!-- Report Problem & Display Browser Version / User Agent Information -->
     </script>
 
     <script type="text/ng-template" id="404.html">

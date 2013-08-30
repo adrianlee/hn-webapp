@@ -81,14 +81,14 @@ h2 {
     left: 50%;
     margin-left: -16px;
     margin-top: -16px;
-    z-index: 100px;
+    z-index: 100;
     height: 31px;
     width: 31px;
 }
 
 /* Header bar */
 
-.header-container {
+.nav {
     font-weight: 200;
     font-size: 16px;
     color: #fff;
@@ -101,17 +101,17 @@ h2 {
     user-select: none;
 }
 
-.header-container a {
+.nav a {
     color: #fff;
 }
 
-.header-container .header {
+.nav .header {
     font-weight: 400;
     font-size: 22px;
     color: rgba(255, 255, 255, 0.9);
 }
 
-.header-container .button {
+.nav .button {
     margin: 5px;
     padding: 0 15px;
     height: 40px;
@@ -121,19 +121,19 @@ h2 {
     border-radius: 3px;
 }
 
-.header-container .left {
+.nav .left {
     position: absolute;
     top: 0;
     left: 0;
 }
 
-.header-container .right {
+.nav .right {
     position: absolute;
     top: 0;
     right: 0;
 }
 
-.header-container .menu {
+.nav .menu {
     position: absolute;
     top: 55px;
     left: 5px;
@@ -149,13 +149,13 @@ h2 {
     /*transition: all 400ms ease;*/
 }
 
-.header-container .hidden {
+.nav .hidden {
     visibility: hidden;
     opacity: 0;
 }
 
 
-.header-container .menu ul a li {
+.nav .menu ul a li {
     padding: 10px 10px;
     border-bottom: 1px solid #7FC6BC;
     border-radius: 3px;
@@ -250,7 +250,7 @@ h2 {
 
 /* Pages */
 
-.pages-container {
+.main {
     position: absolute;
     overflow: hidden;
     top: 0;
@@ -259,7 +259,7 @@ h2 {
     bottom: 0;
 }
 
-.pages-container .page {
+.main .page {
     position: absolute;
     top: 0;
     left: 0;
@@ -281,12 +281,12 @@ h2 {
     transition: all 400ms ease, font-size 0;
 }
 
-.pages-container .page-blank {
+.main .page-blank {
     left: 360px;
     background-color: #7FC6BC;
 }
 
-.pages-container .page-home {
+.main .page-primary {
     display: block;
     width: 100%;
 
@@ -296,7 +296,7 @@ h2 {
     transform: translate3d(-100%, 0, 0);
 }
 
-.pages-container .show-page {
+.main .show-page {
     z-index: 5;
     opacity: 1;
     
@@ -306,7 +306,7 @@ h2 {
     transform: translate3d(0, 0, 0);
 }
 
-.pages-container .header-container {
+.main .nav {
     position: absolute;
     top: 0;
     left: 0;
@@ -315,12 +315,12 @@ h2 {
     background-color: #4BB5C1;
 }
 
-.pages-container .header-container .header {
+.main .nav .header {
     text-align: center;
     line-height: 50px;
 }
 
-.pages-container .primary-container, .pages-container .secondary-container {
+.main .primary-container, .main .secondary-container {
     position: absolute;
     top: 50px;
     left: 0;
@@ -329,6 +329,7 @@ h2 {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
+
 
 /* Media Queries */
 
@@ -345,14 +346,14 @@ h2 {
         width: 50%;
     }
 
-    .pages-container .page {
+    .main .page {
         -webkit-transform: translate(0, 0);
         -moz-transform: translate(0, 0);
         -ms-transform: translate(0, 0);
         transform: translate(0, 0);
     }
 
-    .pages-container .page-home {
+    .main .page-primary {
         width: 360px;
 
         -webkit-transform: translate(0, 0);
@@ -361,15 +362,8 @@ h2 {
         transform: translate(0, 0);
     }
 
-    .android-chrome .pages-container .page-home {
-        display: block;
-    }
-
-    .pages-container .page-about,
-    .pages-container .page-settings,
-    .pages-container .page-performance,
-    .pages-container .page-article-comments,
-    .pages-container .page-article-content {
+    .main .page-tertiary,
+    .main .page-secondary {
         left: 360px;
     }
 }
