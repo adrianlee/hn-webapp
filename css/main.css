@@ -143,16 +143,15 @@ h2 {
     background-color: #4BB5C1;
     z-index: 100;
 
-    -webkit-transition: visibility 100ms ease, opacity 100ms ease;
-    -moz-transition: all 100ms ease;
-    -ms-transition: all 100ms ease;
-    transition: all 100ms ease;
+    /*-webkit-transition: visibility 400ms ease, opacity 400ms ease;*/
+    /*-moz-transition: all 400ms ease;*/
+    /*-ms-transition: all 400ms ease;*/
+    /*transition: all 400ms ease;*/
 }
 
 .header-container .hidden {
     visibility: hidden;
     opacity: 0;
-    margin-top: -10px;
 }
 
 
@@ -169,7 +168,7 @@ h2 {
 }
 
 .secondary-container {
-    margin: 5px;
+    /*margin: 5px;*/
     padding: 10px;
     background-color: #fff;
 }
@@ -179,7 +178,7 @@ h2 {
 
 .primary-item {
     position: relative;
-    padding: 10px;
+    /*padding: 10px;*/
     margin: 5px;
     color: #333;
     background-color: #FFF;
@@ -189,6 +188,7 @@ h2 {
     float: left;
     width: 50%;
     white-space: nowrap;
+    box-shadow: inset 0px 8px 28px #ddd;
 }
 
 .primary-item ul li .icon {

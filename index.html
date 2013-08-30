@@ -27,7 +27,7 @@
 
   <body ng-app="bojap">
     <div class="pages-container" data-ng-controller="MainCtrl">
-      <!-- Left -->
+      <!-- Primary -->
       <div class="page page-home show-page">
         <!-- Header -->
         <div class="header-container">
@@ -37,6 +37,7 @@
           <div class="menu hidden">
             <ul class="list-unstyled">
               <a data-ng-click="menu('student')"><li>Find a Student</li></a>
+              <a href="#!/settings"><li>Settings</li></a>
               <!-- <a data-ng-click="menu('tutor')"><li>Find a Tutor</li></a> -->
             </ul>
           </div>
@@ -55,14 +56,14 @@
         </div>
       </div>
 
-      <!-- Right -->
+      <!-- Secondary -->
       <div class="page page-article-content">
         <!-- Header -->
         <div class="header-container">
           <a class="button left" onclick="history.back()"><i class="icon-step-backward"> back</i></a>
           <a class="button right" onclick="$('.page-article-content').toggleClass('show-page'); $('.page-article-comments').toggleClass('show-page');"><i class="icon-comment-alt"> contact</i></a>
           <header class="header">
-            <span>Content</span>
+            <span data-ng-bind="secondaryTitle"></span>
           </header>
         </div>
 
@@ -167,8 +168,11 @@
     </script>
 
     <script type="text/ng-template" id="settings.html">
-      <div class="secondary-container">
-        <span>hello</span>
+      <div class="secondary-container" data-ng-controller="SettingsCtrl">
+        Font Size: 
+        <a data-ng-click="setFontSize(0)">Small</a>
+        <a data-ng-click="setFontSize(1)">Normal</a>
+        <a data-ng-click="setFontSize(2)">Large</a>
       </div>
     </script>
 

@@ -27,6 +27,7 @@ webapp.config(['$httpProvider', function ($http) {
 webapp.run(function($rootScope, $location) {
   $rootScope.$on("$routeChangeStart", function (event, next, current) {
     $('#loading').hide();
+    $('.menu').addClass('hidden');
 
     if (typeof current == 'undefined') {
       if (next.viewer) {
@@ -52,12 +53,17 @@ webapp.run(function($rootScope, $location) {
 // Left Side
 webapp.controller('MainCtrl', ['$scope', 'screenService', function ($scope, screenService) {
   $scope.template = screenService.getScreen();
+  $scope.secondaryTitle = "Content";
 
   $scope.menu = function (screen) {
     $('#loading').hide();
     $('.menu').addClass('hidden');
     screenService.setScreen(screen);
     $scope.template = screenService.getScreen();
+  }
+
+  $scope.setSecondaryTitle = function (title) {
+    $scope.secondaryTitle = title;
   }
 }]);
 
@@ -179,6 +185,8 @@ webapp.controller('TutorCtrl', ['$scope', '$http', 'CurrentItem', function ($sco
 
 // Right Side
 webapp.controller('StudentProfileCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
+  $scope.setSecondaryTitle('Student Posting');
+
   if ($routeParams.itemId) {
     $scope.itemId = $routeParams.itemId;
   }
@@ -195,6 +203,8 @@ webapp.controller('StudentProfileCtrl', ['$scope', '$http', '$routeParams', 'Cur
 }]);
 
 webapp.controller('TutorProfileCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
+  $scope.setSecondaryTitle('Tutor Posting');
+
   if ($routeParams.itemId) {
     console.log($routeParams.itemId);
     $scope.itemId = $routeParams.itemId;
@@ -212,6 +222,8 @@ webapp.controller('TutorProfileCtrl', ['$scope', '$http', '$routeParams', 'Curre
 }]);
 
 webapp.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem', function ($scope, $http, $routeParams, CurrentItem) {
+  $scope.setSecondaryTitle('User Profile');
+
   if ($routeParams.username) {
     $scope.username = $routeParams.username;
   }
@@ -229,8 +241,26 @@ webapp.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'CurrentItem',
 
 // Settings
 webapp.controller('SettingsCtrl', ['$scope', function ($scope) {
-  console.log('Settings');
-  $scope.title = "Settings";
+  $scope.setSecondaryTitle('Settings')
+
+  $scope.setFontSize = function (size) {
+    $('body').removeClass('font-small').removeClass('font-normal').removeClass('font-large');
+    switch(size) {
+      case 0:
+        $('body').addClass('font-small');
+        break;
+      case 1:
+        $('body').addClass('font-normal');
+        break;
+      case 2: 
+        $('body').addClass('font-large');
+        break;
+    }
+  };
+
+  $scope.setLanguage = function (language) {
+    // not implemented yet
+  };
 }]);
 
 webapp.directive('studentItem', [function () {
